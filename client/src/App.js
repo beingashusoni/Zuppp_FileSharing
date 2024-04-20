@@ -7,7 +7,7 @@ import copyIcon from "./assets/copy-icon.png";
 function App() {
   const [file, setFile] = useState("");
   const [result, setResult] = useState("");
-  const [showCopyIcon, setShowCopyIcon] = useState(false); // State to track if copy icon should be shown
+  const [showCopyIcon, setShowCopyIcon] = useState(false);
 
   const fileInputRef = useRef();
 
@@ -20,7 +20,7 @@ function App() {
 
         const response = await uploadFile(data);
         setResult(response.path);
-        setShowCopyIcon(true); // Set showCopyIcon to true when result is set
+        setShowCopyIcon(true);
       }
     };
     getImage();
@@ -32,13 +32,16 @@ function App() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(result);
+    alert("Link copied to clipboard!");
   };
 
   return (
     <div className="container">
       <img src={shareImage} className="img" alt="banner" />
       <div className="wrapper">
-      <h1>Zuppp! <sub>Share Simply!</sub></h1>
+        <h1>
+          Zuppp! <sub>Share Simply!</sub>
+        </h1>
         <p>Upload, Share & Download your File for Free!</p>
 
         <button onClick={onUploadClick}>Upload</button>
@@ -49,7 +52,7 @@ function App() {
           onChange={(e) => setFile(e.target.files[0])}
         />
 
-        {result && ( // Render link and copy icon only if result is not empty
+        {result && (
           <div className="link-wrapper">
             <a href={result} target="_blank" rel="noreferrer">
               {result}
@@ -64,7 +67,9 @@ function App() {
             )}
           </div>
         )}
-        <span className="note">Note: The best view of this website is laptop/desktop screens.</span>
+        <span className="note">
+          Note: The best view of this website is laptop/desktop screens.
+        </span>
       </div>
     </div>
   );
